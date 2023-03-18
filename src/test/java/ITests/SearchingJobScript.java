@@ -26,10 +26,11 @@ public class SearchingJobScript {
     public VacancysHhPage vacancysHhPage;
     public OtherCountryHhPopUp otherCountryHhPopUp;
     public InsideVacancyHhPage insideVacancyHhPage;
+
     public MainMailRuPage mainMailRuPage;
     public SignInMailRuPopUp signInMailRuPopUp;
-
     public InsideMailRuBoxPage insideMailRuBoxPage;
+
     public static String hhHandle;
     public static String mailRuHandle;
 
@@ -47,8 +48,8 @@ public class SearchingJobScript {
         mainHhPage = new MainHhPage(driver);
         signInHhPage = new SignInHhPage(driver);
         vacancysHhPage = new VacancysHhPage(driver);
-        otherCountryHhPopUp = new OtherCountryHhPopUp(driver);
         insideVacancyHhPage = new InsideVacancyHhPage(driver);
+        otherCountryHhPopUp = new OtherCountryHhPopUp(driver);
 
         mainMailRuPage = new MainMailRuPage(driver);
         signInMailRuPopUp = new SignInMailRuPopUp(driver);
@@ -73,7 +74,7 @@ public class SearchingJobScript {
         mainHhPage.clickAndLetsSignIn();
         signInHhPage.sendLoginData();
         signInHhPage.submitLogin();
-//        signInHhPage.submitSignInData();
+        signInHhPage.submitSignInData();
 //        insideMailRuBoxPage.
     }
 
