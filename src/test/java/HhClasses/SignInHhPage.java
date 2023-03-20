@@ -1,13 +1,10 @@
 package HhClasses;
 
 import ITests.BaseTest;
-import MailRuClasses.InsideMailRuBoxPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-import java.util.Date;
 
 public class SignInHhPage extends BaseTest {
     public final WebDriver driver;

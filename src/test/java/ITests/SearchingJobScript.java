@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 public class SearchingJobScript extends BaseTest{
 
-
     @Tag("SearchingJobScript")
     @Test
     public void searchingTest() throws InterruptedException{
@@ -23,9 +22,10 @@ public class SearchingJobScript extends BaseTest{
 
         insideMailRuBoxPage.readMassageWithSecretCode();
         insideMailRuBoxPage.getSecretCode();
-        signInHhPage.sendPasswordDataAndSubmit();
-        System.out.println("крос");
 
+        signInHhPage.sendPasswordDataAndSubmit();
+        signInHhPage.submitSignInData();
+        System.out.println("крос");
 
     }
 }
