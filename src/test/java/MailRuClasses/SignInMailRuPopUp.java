@@ -1,5 +1,6 @@
 package MailRuClasses;
 
+import HhClasses.ConfProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,15 +14,36 @@ public class SignInMailRuPopUp {
         this.driver = driver;
     }
 
+    @FindBy(xpath = "//iframe[contains(@class, 'popup__frame')]")
+    private WebElement signInIFrame;
+
     @FindBy(xpath = "//input[contains(@name, 'username')]")
-    private WebElement submitLoginButton;
+    private WebElement loginFields;
 
     @FindBy(xpath = "//button[contains(@data-test-id, 'next-button')]")
-    private WebElement submitPasswordButton;
+    private WebElement submitLogin;
 
-    @FindBy(xpath = "//input[@name= 'password']")
+    @FindBy(xpath = "//input[@name = 'password']")
     private WebElement passwordField;
 
     @FindBy(xpath = "//span[contains(@class, 'innerTextWrapper')]")
-    private WebElement submitAuthButton;
+    private WebElement submitSignInButton;
+
+    public void inputLogin() {
+        driver.switchTo().frame(signInIFrame);
+        loginFields.sendKeys(ConfProperties.getProperty("mailRuLogin"));
+    }
+
+    public void submitLogin() {
+        submitLogin.click();
+    }
+
+    public void inputPassword() {
+        passwordField.sendKeys(ConfProperties.getProperty("mailRuPass"));
+    }
+
+    public void submitPassword() {
+        submitSignInButton.click();
+    }
+
 }

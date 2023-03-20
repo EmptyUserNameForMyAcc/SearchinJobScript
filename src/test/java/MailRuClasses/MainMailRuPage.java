@@ -1,5 +1,6 @@
 package MailRuClasses;
 
+import ITests.SearchingJobScript;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +13,14 @@ public class MainMailRuPage {
         this.driver = driver;
     }
 
-    @FindBy(xpath = "//button[contains(@class, 'resplash-btn')]")
+    @FindBy(xpath = "//button[@data-testid='enter-mail-primary']")
     private WebElement buttonOpenSignInPopUp;
+
+    public void goToSignIn() {
+        driver.switchTo().window(SearchingJobScript.mailRuHandle);
+        buttonOpenSignInPopUp.click();
+
+    }
 
 
 }

@@ -5,10 +5,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class VacancysHhPage {
+public class ProfileHhPage {
     public final WebDriver driver;
 
-    public VacancysHhPage(WebDriver driver) {
+    public ProfileHhPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
@@ -18,4 +18,9 @@ public class VacancysHhPage {
 
     @FindBy(xpath = "//button[@data-qa = 'search-button']")
     private WebElement searchVacancyButton;
+
+    public void letsFindAJobYep() {
+        searchVacancyField.sendKeys();
+    }
+
 }
