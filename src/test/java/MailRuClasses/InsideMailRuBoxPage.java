@@ -1,9 +1,12 @@
 package MailRuClasses;
 
 import ITests.BaseTest;
+import org.checkerframework.checker.units.qual.C;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -25,7 +28,7 @@ public class InsideMailRuBoxPage {
     private WebElement massageWithSecretCode;
 
     @FindBy(xpath = "//p/b")
-    private static WebElement secretCodeElement;
+    private WebElement secretCodeElement;
 
     public void readMassageWithSecretCode() throws InterruptedException {
         driver.switchTo().window(BaseTest.mailRuHandle);
@@ -39,9 +42,11 @@ public class InsideMailRuBoxPage {
         }
     }
 
-    public static String getSecretCode() {
-        secretCodeElement.sendKeys(Keys.DELETE);
-        secretCodeElement.sendKeys(Keys.CONTROL + "w");
-        return secretCodeElement.getText();
+    public void getSecretCode() {
+        BaseTest.secretCode = secretCodeElement.getText();
+        new Actions(driver)
+                .sendKeys(Keys.DELETE)
+                .perform();
+        driver.close();
     }
 }

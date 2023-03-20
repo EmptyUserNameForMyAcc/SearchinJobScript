@@ -1,6 +1,5 @@
 package ITests;
 
-import MailRuClasses.InsideMailRuBoxPage;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +22,10 @@ public class SearchingJobScript extends BaseTest{
         signInMailRuPopUp.submitPassword();
 
         insideMailRuBoxPage.readMassageWithSecretCode();
-        InsideMailRuBoxPage.getSecretCode();
-
+        insideMailRuBoxPage.getSecretCode();
         signInHhPage.sendPasswordDataAndSubmit();
-
         System.out.println("крос");
-        System.out.println(InsideMailRuBoxPage.getSecretCode());
+
 
     }
 }

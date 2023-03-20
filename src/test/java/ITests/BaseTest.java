@@ -8,6 +8,7 @@ import MailRuClasses.SignInMailRuPopUp;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+import org.checkerframework.checker.index.qual.PolyUpperBound;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,6 +36,7 @@ public abstract class BaseTest {
 
     public static String hhHandle;
     public static String mailRuHandle;
+    public static String secretCode;
 
     @BeforeAll
     public static void setupWebDriver() {

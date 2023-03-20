@@ -9,11 +9,10 @@ import org.openqa.selenium.support.PageFactory;
 
 import java.util.Date;
 
-public class SignInHhPage extends InsideMailRuBoxPage {
+public class SignInHhPage extends BaseTest {
     public final WebDriver driver;
 
     public SignInHhPage(WebDriver driver) {
-        super(driver);
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
@@ -30,13 +29,11 @@ public class SignInHhPage extends InsideMailRuBoxPage {
     @FindBy(xpath = "//input[@data-qa = 'otp-code-input']")
     private WebElement passwordFiled;
 
-    @FindBy(xpath = "//span/parent:button[@data-qa = 'otp-code-submit']")
-    private WebElement submitEnteringData; // Parent using just for showing. Redundant in this case.
+    @FindBy(xpath = "//button[@data-qa = 'otp-code-submit']")
+    private WebElement submitEnteringData;
 
-    public static Date sentMassageDate;
     public void sendLoginData() {
-        loginField.sendKeys(ConfProperties.getProperty("lalala"));
-        sentMassageDate = new Date();
+        loginField.sendKeys(ConfProperties.getProperty("mailRuLogin"));
     }
 
     public void submitSignInData() {
@@ -45,7 +42,7 @@ public class SignInHhPage extends InsideMailRuBoxPage {
 
     public void sendPasswordDataAndSubmit() {
         driver.switchTo().window(BaseTest.hhHandle);
-        passwordFiled.sendKeys(InsideMailRuBoxPage.getSecretCode());
+        passwordFiled.sendKeys(BaseTest.secretCode);
         submitEnteringData.click();
     }
 }
