@@ -8,7 +8,6 @@ import MailRuClasses.SignInMailRuPopUp;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-import org.checkerframework.checker.index.qual.PolyUpperBound;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class BaseTest {
 
-    public WebDriver driver;
+    public static WebDriver driver;
 
     public MainHhPage mainHhPage;
     public SignInHhPage signInHhPage;
@@ -67,18 +66,11 @@ public abstract class BaseTest {
         hhHandle = driver.getWindowHandle();
 
         driver.switchTo().newWindow(WindowType.TAB).navigate().to(ConfProperties.getProperty("mailRuUrl"));
-
-        for (String differentHandle : driver.getWindowHandles()) {
-            if(!hhHandle.contentEquals(differentHandle)) {
-                mailRuHandle = differentHandle;
-                break;
-            }
-        }
+        mailRuHandle = driver.getWindowHandle();
     }
 
     @AfterEach
     public void tearsDown() {
-        driver.close();
         driver.quit();
     }
 }

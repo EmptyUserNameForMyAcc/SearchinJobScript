@@ -41,10 +41,16 @@ public class InsideMailRuBoxPage {
         }
     }
 
-    public void getSecretCode() {
-        BaseTest.secretCode = secretCodeElement.getText();
-        new Actions(driver)
-                .sendKeys(Keys.DELETE)
-                .perform();
+    public void getSecretCode() throws InterruptedException{
+        try {
+            BaseTest.secretCode = secretCodeElement.getText();
+            new Actions(driver)
+                    .sendKeys(Keys.DELETE)
+                    .perform();
+        }
+        finally {
+            Thread.sleep(100);
+            driver.close();
+        }
     }
 }
