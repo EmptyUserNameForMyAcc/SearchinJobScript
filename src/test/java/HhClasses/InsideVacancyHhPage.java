@@ -1,12 +1,13 @@
 package HhClasses;
 
+import ITests.BaseTest;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class InsideVacancyHhPage {
-    public final WebDriver driver;
+public class InsideVacancyHhPage extends BaseTest {
+    public WebDriver driver;
 
     public InsideVacancyHhPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -16,7 +17,7 @@ public class InsideVacancyHhPage {
     @FindBy(className = "vacancy-description-list-item")
     private WebElement experienceInfo;
 
-    @FindBy(xpath = "//div[@data-qa = 'vacancy-description']")
+    @FindBy(xpath = "//div[@data-qa='vacancy-description']/span")
     private WebElement vacancyDescription;
 
     @FindBy(xpath = "//div[@class = 'bloko-tag-list']/div/span")
@@ -42,4 +43,16 @@ public class InsideVacancyHhPage {
 
     @FindBy(xpath = "//a[@data-qa = 'vacancy-response-link-view-topic']/span")
     private WebElement buttonAfterSentCv; // For check changes in button text.
+
+    public void sortVacancy() {
+        driver.switchTo().window(vacancyHandle);
+        //code
+        try {
+            System.out.println(driver.getWindowHandle() + " и " + vacancyHandle);
+            System.out.println(vacancyDescription.getText());
+        } finally {
+            driver.close();
+            vacancysHhPage.getVacancysDescription();
+        }
+    }
 }

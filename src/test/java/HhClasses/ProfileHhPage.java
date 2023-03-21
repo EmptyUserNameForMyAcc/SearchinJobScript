@@ -19,8 +19,12 @@ public class ProfileHhPage {
     @FindBy(xpath = "//button[@data-qa = 'search-button']")
     private WebElement searchVacancyButton;
 
-    public void letsFindAJobYep() {
-        searchVacancyField.sendKeys();
+    public void letsFindAJobYep(String parametersData) {
+        searchVacancyField.sendKeys(parametersData);
+        searchVacancyButton.click();
     }
 
+    public void clearSearchingField() {
+        searchVacancyField.clear();
+    }
 }

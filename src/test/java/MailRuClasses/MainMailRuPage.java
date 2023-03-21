@@ -1,5 +1,6 @@
 package MailRuClasses;
 
+import ITests.BaseTest;
 import ITests.SearchingJobScript;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,10 +18,7 @@ public class MainMailRuPage {
     private WebElement buttonOpenSignInPopUp;
 
     public void goToSignIn() {
-        driver.switchTo().window(SearchingJobScript.mailRuHandle);
+        driver.switchTo().window(BaseTest.mailRuHandle);
         buttonOpenSignInPopUp.click();
-
     }
-
-
 }

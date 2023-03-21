@@ -1,4 +1,4 @@
-package HhClasses;
+package resources;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -6,8 +6,8 @@ import java.util.Properties;
 
 public class ConfProperties {
 
-    public static FileInputStream fileInputStream;
-    public static Properties PROPERTIES;
+    private static FileInputStream fileInputStream;
+    private static Properties PROPERTIES;
 
     static {
         try {
@@ -30,5 +30,4 @@ public class ConfProperties {
     public static String getProperty(String key) {
         return PROPERTIES.getProperty(key);
     }
-//    protected static String setProperty(String key) {return .setProperty(key);}
 }

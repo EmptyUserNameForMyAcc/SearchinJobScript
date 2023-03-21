@@ -1,6 +1,6 @@
 package MailRuClasses;
 
-import HhClasses.ConfProperties;
+import resources.ConfProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
