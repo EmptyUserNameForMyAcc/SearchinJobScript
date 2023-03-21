@@ -1,5 +1,6 @@
 # SearchinJobScript
 This script find me job. 
+
 /*
 * Данный скрипт реализован для следующих целей: Поиск работы по заданным критериям поиска на сайте https://hh.ru.
 * Осуществляет дейтсивия:
@@ -63,13 +64,9 @@ This script find me job.
 * Локатор: //input[@type = 'number'] +
 *
 * 15. Кнопка подтверждения логина:
-* Локатор: //form/descendant::button[@data-qa = 'account-signup-submit'] (усложнён для наглядности понимания работы
- * с xPath)
+* Локатор: //button[@data-qa = 'account-signup-submit'] +
 *
 * Модификаторы доступа расставлены для наглядности понимания необходимости в доступе к полям с дальнейшей возможностью
 * расширения тестов.
+*
 */
-
-
-
-https://hh.ru/vacancy/75831711?from=vacancy_search_list&query=Qa%20automation%20engineer
