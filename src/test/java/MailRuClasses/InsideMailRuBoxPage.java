@@ -1,11 +1,11 @@
 package MailRuClasses;
 
 import ITests.BaseTest;
+import static ITests.BaseTest.actions;
 
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -41,15 +41,14 @@ public class InsideMailRuBoxPage {
         }
     }
 
-    public void getSecretCode() throws InterruptedException{
+    public void getSecretCode() throws InterruptedException {
         try {
             BaseTest.secretCode = secretCodeElement.getText();
-            new Actions(driver)
+            actions
                     .sendKeys(Keys.DELETE)
                     .perform();
-        }
-        finally {
-            Thread.sleep(100);
+        } finally {
+            Thread.sleep(150);
             driver.close();
         }
     }

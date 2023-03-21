@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import resources.ConfProperties;
 
-public class SignInHhPage extends BaseTest {
+public class SignInHhPage {
     public final WebDriver driver;
 
     public SignInHhPage(WebDriver driver) {

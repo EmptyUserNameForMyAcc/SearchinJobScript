@@ -1,15 +1,19 @@
 package ITests;
 
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.openqa.selenium.StaleElementReferenceException;
 
-public class SearchingJobScript extends BaseTest{
-
-    @Tag("SearchingJobScript")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class SearchingJobScript extends BaseTest {
+    /**
+     * Данный тест проводит авторизацию на двух сервисах: Hh.ru и Mail.ru.
+     */
+    @Tag("authorizationTest")
+    @Order(1)
     @Test
-    public void searchingTest() throws InterruptedException{
+    public void authorizationTest() throws InterruptedException, StaleElementReferenceException {
         mainHhPage.clickAndLetsSignIn();
 
         signInHhPage.sendLoginData();
@@ -30,6 +34,22 @@ public class SearchingJobScript extends BaseTest{
         System.out.println("крос");
     }
 
-//    @ParameterizedTest
-//    @ValueSource
+    /**
+     * Данный тест осуществляет поиск, филтрацию и откликается на/ скрывает вакансии по заданным параметрам.
+     */
+    @Tag("SearchingJobScript")
+    @Order(2)
+    @ParameterizedTest
+    @ValueSource(strings = {"QA Automation Engineer Тестировщик", "Автотестировщик", "Автоматическому тестированию",
+            "Автоматизации тестирования", "AQA", "QA инженер", "QA engineer", "QA Engineer Automation", "Qa Java",
+            "Тест"})
+    public void searchingScriptTest(String testData) {
+        profileHhPage.letsFindAJobYep(testData);
+
+        vacancysHhPage.getVacancysDescription();
+        insideVacancyHhPage.sortVacancy();
+
+        profileHhPage.clearSearchingField();
+        System.out.println("крос");
+    }
 }
