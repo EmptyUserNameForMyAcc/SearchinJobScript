@@ -1,20 +1,20 @@
-package MailRuClasses;
+package pages.MailRuClasses;
 
-import ITests.BaseTest;
-import static ITests.BaseTest.actions;
+import pages.base.BaseTestPage;
 
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class InsideMailRuBoxPage {
-    public final WebDriver driver;
+import java.time.Duration;
 
-    public InsideMailRuBoxPage(WebDriver driver) {
+import static constants.Constants.TimeOutsVariables.EXPLICITLY_WAIT;
+
+public class InsideMailRuBoxPage extends BaseTestPage {
+
+    public InsideMailRuBoxPage() {
         PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     @FindBy(xpath = "//div[@aria-label = 'grid']/div/a[1]//div[3]/descendant::span[4]")
@@ -30,26 +30,27 @@ public class InsideMailRuBoxPage {
     private WebElement secretCodeElement;
 
     public void readMassageWithSecretCode() throws InterruptedException {
-        driver.switchTo().window(BaseTest.mailRuHandle);
+        driver.switchTo().window(BaseTestPage.mailRuHandle);
         while (true) {
             if (firstMassage.isDisplayed() && uniqDataFromMassage.getText().contains("hh.ru")) {
                 firstMassage.click();
                 break;
             } else {
-                Thread.sleep(10);
+                Thread.sleep(Duration.ofMillis(EXPLICITLY_WAIT));
             }
         }
     }
 
-    public void getSecretCode() throws InterruptedException {
+    public void getSecretCode() {
+        secretCode = secretCodeElement.getText();
+        actions
+                .sendKeys(Keys.DELETE)
+                .perform();
         try {
-            BaseTest.secretCode = secretCodeElement.getText();
-            actions
-                    .sendKeys(Keys.DELETE)
-                    .perform();
-        } finally {
-            Thread.sleep(150);
-            driver.close();
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+        driver.close();
     }
 }

@@ -1,24 +1,21 @@
-package MailRuClasses;
+package pages.MailRuClasses;
 
-import ITests.BaseTest;
-import ITests.SearchingJobScript;
-import org.openqa.selenium.WebDriver;
+import pages.base.BaseTestPage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainMailRuPage {
-    public final WebDriver driver;
-    public MainMailRuPage(WebDriver driver){
+public class MainMailRuPage extends BaseTestPage {
+    public MainMailRuPage(){
         PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     @FindBy(xpath = "//button[@data-testid='enter-mail-primary']")
     private WebElement buttonOpenSignInPopUp;
 
     public void goToSignIn() {
-        driver.switchTo().window(BaseTest.mailRuHandle);
+        driver.switchTo().window(BaseTestPage.mailRuHandle);
         buttonOpenSignInPopUp.click();
     }
 }

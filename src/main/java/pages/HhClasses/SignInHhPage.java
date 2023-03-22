@@ -1,18 +1,17 @@
-package HhClasses;
+package pages.HhClasses;
 
-import ITests.BaseTest;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import pages.base.BaseTestPage;
+
 import resources.ConfProperties;
 
-public class SignInHhPage {
-    public final WebDriver driver;
+public class SignInHhPage extends BaseTestPage {
 
-    public SignInHhPage(WebDriver driver) {
+    public SignInHhPage() {
         PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     @FindBy(xpath = "//input[@name = 'login']")
@@ -35,12 +34,15 @@ public class SignInHhPage {
     }
 
     public void submitSignInData() {
-        submitEnteringData.click();
+        waitElementIsVisible(submitEnteringData);
+        BaseTestPage.actions.clickAndHold(submitEnteringData);
     }
 
     public void sendPasswordDataAndSubmit() {
-        driver.switchTo().window(BaseTest.hhHandle);
-        passwordFiled.sendKeys(BaseTest.secretCode);
+        driver.switchTo().window(BaseTestPage.hhHandle);
+
+        waitElementIsVisible(passwordFiled);
+        passwordFiled.sendKeys(secretCode);
         submitEnteringData.click();
     }
 }
