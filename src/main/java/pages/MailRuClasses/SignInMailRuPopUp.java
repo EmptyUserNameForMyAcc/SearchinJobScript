@@ -1,17 +1,17 @@
-package MailRuClasses;
+package pages.MailRuClasses;
+
+import pages.base.BaseTestPage;
 
 import resources.ConfProperties;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class SignInMailRuPopUp {
-    public final WebDriver driver;
+public class SignInMailRuPopUp extends BaseTestPage {
 
-    public SignInMailRuPopUp(WebDriver driver) {
+    public SignInMailRuPopUp() {
         PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     @FindBy(xpath = "//iframe[contains(@class, 'popup__frame')]")
@@ -31,19 +31,19 @@ public class SignInMailRuPopUp {
 
     public void inputLogin() {
         driver.switchTo().frame(signInIFrame);
-        loginFields.sendKeys(ConfProperties.getProperty("mailRuLogin"));
+        waitElementIsVisible(loginFields).sendKeys(ConfProperties.getProperty("mailRuLogin"));
     }
 
     public void submitLogin() {
-        submitLogin.click();
+        waitElementIsVisible(submitLogin).click();
     }
 
     public void inputPassword() {
-        passwordField.sendKeys(ConfProperties.getProperty("mailRuPass"));
+        waitElementIsVisible(passwordField).sendKeys(ConfProperties.getProperty("mailRuPass"));
     }
 
     public void submitPassword() {
-        submitSignInButton.click();
+        waitElementIsVisible(submitSignInButton).click();
     }
 
 }

@@ -11,8 +11,8 @@ public class ConfProperties {
 
     static {
         try {
-            fileInputStream = new FileInputStream("/home/palam/IdeaProjects/SearchingJobScript/src/test/java" +
-                    "/resources/conf.properties");
+            fileInputStream = new FileInputStream("/home/palam/IdeaProjects/SearchingJobScript/src/main/java/" +
+                    "resources/conf.properties");
             PROPERTIES = new Properties();
             PROPERTIES.load(fileInputStream);
         } catch (IOException e) {

@@ -1,17 +1,15 @@
-package HhClasses;
+package pages.HhClasses;
 
-import ITests.BaseTest;
-import org.openqa.selenium.WebDriver;
+import pages.base.BaseTestPage;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class InsideVacancyHhPage extends BaseTest {
-    public WebDriver driver;
+public class InsideVacancyHhPage extends BaseTestPage {
 
-    public InsideVacancyHhPage(WebDriver driver) {
+    public InsideVacancyHhPage() {
         PageFactory.initElements(driver, this);
-        this.driver = driver;
     }
 
     @FindBy(className = "vacancy-description-list-item")
@@ -45,14 +43,16 @@ public class InsideVacancyHhPage extends BaseTest {
     private WebElement buttonAfterSentCv; // For check changes in button text.
 
     public void sortVacancy() {
-        driver.switchTo().window(vacancyHandle);
         //code
-        try {
-            System.out.println(driver.getWindowHandle() + " и " + vacancyHandle);
+            System.out.println(vacancyHandle);
             System.out.println(vacancyDescription.getText());
-        } finally {
-            driver.close();
-            vacancysHhPage.getVacancysDescription();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
+        driver.close();
+        driver.switchTo().window(BaseTestPage.hhHandle);
+        vacancysHhPage.getVacancysDescription();
     }
 }
