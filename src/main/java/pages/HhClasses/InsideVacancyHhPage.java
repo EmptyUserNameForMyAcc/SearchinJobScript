@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class InsideVacancyHhPage extends BaseTestPage {
 
     public InsideVacancyHhPage() {
@@ -15,8 +17,8 @@ public class InsideVacancyHhPage extends BaseTestPage {
     @FindBy(className = "vacancy-description-list-item")
     private WebElement experienceInfo;
 
-    @FindBy(xpath = "//div[@data-qa='vacancy-description']/span")
-    private WebElement vacancyDescription;
+    @FindBy(xpath = "//div[@data-qa='vacancy-description']/ul")
+    private List<WebElement> vacancyDescription;
 
     @FindBy(xpath = "//div[@class = 'bloko-tag-list']/div/span")
     private WebElement keySkills;
@@ -44,22 +46,16 @@ public class InsideVacancyHhPage extends BaseTestPage {
 
     public void sortVacancy() {
         //code
-            System.out.println("Я ТУТ, В СОРТ МЕТОДЕ!!!");
-            System.out.println(vacancyDescription.getText());
+        System.out.println("Я ТУТ, В СОРТ МЕТОДЕ!!!");
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+            for (WebElement descriptionVacancyText : vacancyDescription) {
+                System.out.println(descriptionVacancyText.getText());
+            }
+        } catch (NullPointerException e) {
+            e.getStackTrace();
+        } finally {
+            driver.close();
+            driver.switchTo().window(BaseTestPage.hhHandle);
         }
-
-        driver.close();
-
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.switchTo().window(BaseTestPage.hhHandle);
-        vacancysHhPage.getVacancysDescription();
     }
 }

@@ -1,11 +1,8 @@
 package pages.HhClasses;
 
-import constants.Constants;
-
 import pages.base.BaseTestPage;
 
 import org.openqa.selenium.*;
-import org.openqa.selenium.json.JsonException;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -17,31 +14,21 @@ public class VacancysHhPage extends BaseTestPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//h3")
+    @FindBy(xpath = "//h3//a")
     private List<WebElement> vacancysTitle;
 
     public void getVacancysDescription() {
         try {
-            for (WebElement vacancyTitle : waitElementsIsVisible(vacancysTitle)) {
-                System.out.println(vacancyTitle.toString());
-                actions
-                        .keyDown(Keys.LEFT_CONTROL)
-                        .click(waitElementIsVisible(vacancyTitle))
-                        .build()
-                        .perform();
+            for (WebElement oneVacancy : vacancysTitle) {
+                String vacacyUrl = oneVacancy.getAttribute("href");
+                System.out.println(vacacyUrl);
 
-                for (String otherHandle : driver.getWindowHandles()) {
-                    if (!hhHandle.contentEquals(otherHandle)) {
-                        vacancyHandle = otherHandle;
-                        driver.switchTo().window(vacancyHandle);
-                        break;
-                    }
-                }
-                System.out.println(" я ID вакансии\n" + vacancyHandle + " я ID хх" + hhHandle);
-                driver.switchTo().window(vacancyHandle);
+                driver.switchTo().newWindow(WindowType.TAB).navigate().to(vacacyUrl);
+                vacancyHandle = driver.getWindowHandle();
+                System.out.println("Я ID вакансии " + vacancyHandle + "\n" + "Я ID Hh " + hhHandle);
                 insideVacancyHhPage.sortVacancy();
             }
-        } catch (JsonException | TimeoutException e) {
+        } catch (TimeoutException e) {
             e.getCause().getStackTrace();
         }
     }
