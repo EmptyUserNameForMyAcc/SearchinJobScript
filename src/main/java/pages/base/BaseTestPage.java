@@ -1,5 +1,6 @@
 package pages.base;
 
+import constants.Constants;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,21 +33,6 @@ public abstract class BaseTestPage {
 
     public static WebDriver driver;
 
-    public void open(String url) {
-        driver.get(url);
-    }
-
-    public WebElement waitElementIsVisible(WebElement element) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT)).until(ExpectedConditions.visibilityOf(element));
-        return element;
-    }
-
-    public List<WebElement> waitElementIsVisible(List<WebElement> elements) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT)).until(ExpectedConditions
-                .visibilityOfAllElements(elements));
-        return elements;
-    }
-
     public MainHhPage mainHhPage;
     public SignInHhPage signInHhPage;
     public ProfileHhPage profileHhPage;
@@ -60,9 +46,10 @@ public abstract class BaseTestPage {
 
     public static String hhHandle;
     public static String mailRuHandle;
-    public static Actions actions;
     public static String secretCode;
     public static String vacancyHandle;
+
+    public Actions actions;
 
     @BeforeAll
     public static void setUp() {
@@ -72,8 +59,6 @@ public abstract class BaseTestPage {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LOADING_PAGE_WAIT));
-
-        actions = new Actions(driver);
 
         driver.get(ConfProperties.getProperty("hhUrl"));
         hhHandle = driver.getWindowHandle();
@@ -94,6 +79,8 @@ public abstract class BaseTestPage {
         mainMailRuPage = new MainMailRuPage();
         signInMailRuPopUp = new SignInMailRuPopUp();
         insideMailRuBoxPage = new InsideMailRuBoxPage();
+
+        actions = new Actions(driver);
     }
 
     @AfterAll
@@ -101,4 +88,106 @@ public abstract class BaseTestPage {
         driver.close();
         driver.quit();
     }
+
+    public void open(String url) {
+        driver.get(url);
+    }
+
+    /**
+     *
+     *
+     * НАЧАЛО БЛОКА ОЖИДАНИЯ ПОЯВЛЕНИЯ И ИСЧЕСЗОВЕНИЯ ЭЛЕМЕНТОВ.
+     *
+     *
+     *
+     */
+
+    /**
+     * Задаёт явное ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (В данный момент ожидание составляет 10 сек.)
+     */
+    public WebElement waitElementIsVisible(WebElement visibilityOfElement) {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+                .until(ExpectedConditions.visibilityOf(visibilityOfElement));
+        return visibilityOfElement;
+    }
+
+    /**
+     * Задаёт явное ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (В данный момент ожидание составляет 10 сек.)
+     */
+    public List<WebElement> waitElementsIsVisible(List<WebElement> longVisibilityOfElements) {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+                .until(ExpectedConditions.visibilityOfAllElements(longVisibilityOfElements));
+        return longVisibilityOfElements;
+    }
+
+    /**
+     * Задаёт явное ДОЛГОЕ ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные
+     * значения ожидания.)
+     */
+    public WebElement longWaitElementIsVisible(WebElement longWaitElement, short TIME) {
+        new WebDriverWait(driver, Duration.ofSeconds(TIME))
+                .until(ExpectedConditions.visibilityOf(longWaitElement));
+        return longWaitElement;
+    }
+
+    /**
+     * Задаёт явное ДОЛГОЕ ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (Позволяет задавать произвольные
+     * значения ожидания.)
+     */
+    public List<WebElement> longWaitElementsIsVisible(List<WebElement> visibilityOElements, short TIME) {
+        new WebDriverWait(driver, Duration.ofSeconds(TIME))
+                .until(ExpectedConditions.visibilityOfAllElements(visibilityOElements));
+        return visibilityOElements;
+    }
+
+    /**
+     * ДОЛГОЕ ожидание ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные значения ожидания.)
+     */
+    public WebElement LongWaitInvisibilityOfElement(WebElement invisOfElement) {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+                .until(ExpectedConditions.invisibilityOf(invisOfElement));
+        return invisOfElement;
+    }
+
+    /**
+     * ДОЛГОЕ ожидание ИСЧЕЗНОВЕНИЯ МНОЖЕСТВА элементов. (Позволяет задавать произвольные значения ожидания.)
+     */
+    public List<WebElement> longWaitInvisibilityOfElements(List<WebElement> invisOfElements) {
+        new WebDriverWait(driver, Duration.ofSeconds(LONG_EXPLICITLY_WAIT))
+                .until(ExpectedConditions.invisibilityOfAllElements());
+        return invisOfElements;
+    }
+
+    /**
+     *
+     *
+     * КОНЕЦ БЛОКА С МЕТОДАМИ ОЖИДАНИЯ.
+     *
+     *
+     * */
+
+
+    /*
+     *
+     * НАЧАЛО БЛОКА РАНДОМА
+     *
+     */
+
+    /**
+     * Задаёт рандомное время ожидания треда.
+     */
+    public void randomWait() {
+        try {
+            Thread.sleep((short) Constants.TimeOutsVariables.RANDOM_WAIT);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /*
+     *
+     * КОНЕЦ БЛОКА РАНДОМА
+     *
+     **/
+
 }

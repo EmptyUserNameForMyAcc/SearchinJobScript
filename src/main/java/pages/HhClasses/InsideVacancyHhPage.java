@@ -44,14 +44,21 @@ public class InsideVacancyHhPage extends BaseTestPage {
 
     public void sortVacancy() {
         //code
-            System.out.println(vacancyHandle);
+            System.out.println("Я ТУТ, В СОРТ МЕТОДЕ!!!");
             System.out.println(vacancyDescription.getText());
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         driver.close();
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         driver.switchTo().window(BaseTestPage.hhHandle);
         vacancysHhPage.getVacancysDescription();
     }

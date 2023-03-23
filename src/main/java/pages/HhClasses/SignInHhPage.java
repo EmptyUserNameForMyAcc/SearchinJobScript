@@ -34,15 +34,13 @@ public class SignInHhPage extends BaseTestPage {
     }
 
     public void submitSignInData() {
-        waitElementIsVisible(submitEnteringData);
-        BaseTestPage.actions.clickAndHold(submitEnteringData);
+        actions
+                .clickAndHold(waitElementIsVisible(submitEnteringData));
     }
 
     public void sendPasswordDataAndSubmit() {
         driver.switchTo().window(BaseTestPage.hhHandle);
-
-        waitElementIsVisible(passwordFiled);
-        passwordFiled.sendKeys(secretCode);
+        waitElementIsVisible(passwordFiled).sendKeys(secretCode);
         submitEnteringData.click();
     }
 }

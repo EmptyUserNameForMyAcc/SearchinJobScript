@@ -22,34 +22,27 @@ public class VacancysHhPage extends BaseTestPage {
 
     public void getVacancysDescription() {
         try {
-            for (WebElement vacancyTitle : waitElementIsVisible(vacancysTitle)) {
-                if (driver.getWindowHandles().size() == 1) {
-                    System.out.println(driver.getWindowHandles().size() + " я количество открытых табов");
-                    BaseTestPage.actions
-                            .keyDown(waitElementIsVisible(vacancyTitle), Keys.LEFT_CONTROL)
-                            .clickAndHold()
-                            .perform();
+            for (WebElement vacancyTitle : waitElementsIsVisible(vacancysTitle)) {
+                System.out.println(vacancyTitle.toString());
+                actions
+                        .keyDown(Keys.LEFT_CONTROL)
+                        .click(waitElementIsVisible(vacancyTitle))
+                        .build()
+                        .perform();
 
-                    for (String otherHandle : driver.getWindowHandles()) {
-                        if (!hhHandle.contentEquals(otherHandle)) {
-                            vacancyHandle = otherHandle;
-                            driver.switchTo().window(vacancyHandle);
-                            break;
-                        }
+                for (String otherHandle : driver.getWindowHandles()) {
+                    if (!hhHandle.contentEquals(otherHandle)) {
+                        vacancyHandle = otherHandle;
+                        driver.switchTo().window(vacancyHandle);
+                        break;
                     }
                 }
+                System.out.println(" я ID вакансии\n" + vacancyHandle + " я ID хх" + hhHandle);
+                driver.switchTo().window(vacancyHandle);
                 insideVacancyHhPage.sortVacancy();
             }
         } catch (JsonException | TimeoutException e) {
             e.getCause().getStackTrace();
-        }
-    }
-
-    public void randomWait() {
-        try {
-            Thread.sleep((int) Constants.TimeOutsVariables.RANDOM_WAIT);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
 }
