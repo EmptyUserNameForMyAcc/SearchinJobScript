@@ -25,6 +25,7 @@ import org.openqa.selenium.interactions.Actions;
 import resources.ConfProperties;
 
 import java.time.Duration;
+
 import java.util.List;
 
 import static constants.Constants.TimeOutsVariables.*;
@@ -48,13 +49,13 @@ public abstract class BaseTestPage {
     public static String mailRuHandle;
     public static String secretCode;
     public static String vacancyHandle;
-
-    public Actions actions;
+    public static Actions actions;
 
     @BeforeAll
     public static void setUp() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        actions = new Actions(driver);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT));
@@ -79,8 +80,6 @@ public abstract class BaseTestPage {
         mainMailRuPage = new MainMailRuPage();
         signInMailRuPopUp = new SignInMailRuPopUp();
         insideMailRuBoxPage = new InsideMailRuBoxPage();
-
-        actions = new Actions(driver);
     }
 
     @AfterAll
@@ -103,7 +102,7 @@ public abstract class BaseTestPage {
      */
 
     /**
-     * Задаёт явное ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (В данный момент ожидание составляет 10 сек.)
+     * Задаёт явное ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (По умолчанию 10 сек.)
      */
     public WebElement waitElementIsVisible(WebElement visibilityOfElement) {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
@@ -112,7 +111,7 @@ public abstract class BaseTestPage {
     }
 
     /**
-     * Задаёт явное ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (В данный момент ожидание составляет 10 сек.)
+     * Задаёт явное ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (По умолчанию 10 сек.)
      */
     public List<WebElement> waitElementsIsVisible(List<WebElement> longVisibilityOfElements) {
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
@@ -141,10 +140,19 @@ public abstract class BaseTestPage {
     }
 
     /**
+     * Ожидание ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (По умолчанию 10 сек.)
+     */
+    public WebElement waitInvisibilityOfElement(WebElement invisOfElement) {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+                .until(ExpectedConditions.invisibilityOf(invisOfElement));
+        return invisOfElement;
+    }
+
+    /**
      * ДОЛГОЕ ожидание ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные значения ожидания.)
      */
-    public WebElement LongWaitInvisibilityOfElement(WebElement invisOfElement) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+    public WebElement LongWaitInvisibilityOfElement(WebElement invisOfElement, short TIME) {
+        new WebDriverWait(driver, Duration.ofSeconds(TIME))
                 .until(ExpectedConditions.invisibilityOf(invisOfElement));
         return invisOfElement;
     }

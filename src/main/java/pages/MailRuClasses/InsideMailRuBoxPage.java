@@ -1,9 +1,9 @@
 package pages.MailRuClasses;
 
+import org.openqa.selenium.*;
+
 import pages.base.BaseTestPage;
 
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -40,10 +40,18 @@ public class InsideMailRuBoxPage extends BaseTestPage {
 
     public void getSecretCode() {
         secretCode = secretCodeElement.getText();
-        actions
-                .sendKeys(Keys.DELETE)
-                .perform();
-        LongWaitInvisibilityOfElement(secretCodeElement);
+        try {
+            while (secretCodeElement.isDisplayed()) {
+                if (secretCodeElement.isDisplayed()) {
+                    actions
+                            .sendKeys(Keys.DELETE)
+                            .perform();
+                    Thread.sleep(700);
+                }
+            }
+        } catch (StaleElementReferenceException | NoSuchElementException | InterruptedException serensex) {
+            serensex.getStackTrace();
+        }
         driver.close();
     }
 }

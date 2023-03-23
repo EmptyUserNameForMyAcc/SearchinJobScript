@@ -1,7 +1,5 @@
 package pages.HhClasses;
 
-import constants.Constants;
-
 import pages.base.BaseTestPage;
 
 import org.openqa.selenium.*;
@@ -17,26 +15,27 @@ public class VacancysHhPage extends BaseTestPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//h3")
+    @FindBy(xpath = "//h3//a")
     private List<WebElement> vacancysTitle;
 
     public void getVacancysDescription() {
         try {
             for (WebElement vacancyTitle : waitElementsIsVisible(vacancysTitle)) {
-                System.out.println(vacancyTitle.toString());
+                System.out.println(vacancyTitle.toString() + " а я ссылка объекта на новую страницу");
                 actions
                         .keyDown(Keys.LEFT_CONTROL)
-                        .click(waitElementIsVisible(vacancyTitle))
-                        .build()
+                        .click(vacancyTitle)
+                        .keyUp(Keys.LEFT_CONTROL)
                         .perform();
 
                 for (String otherHandle : driver.getWindowHandles()) {
                     if (!hhHandle.contentEquals(otherHandle)) {
                         vacancyHandle = otherHandle;
-                        driver.switchTo().window(vacancyHandle);
+                        System.out.println(otherHandle);
                         break;
                     }
                 }
+
                 System.out.println(" я ID вакансии\n" + vacancyHandle + " я ID хх" + hhHandle);
                 driver.switchTo().window(vacancyHandle);
                 insideVacancyHhPage.sortVacancy();
