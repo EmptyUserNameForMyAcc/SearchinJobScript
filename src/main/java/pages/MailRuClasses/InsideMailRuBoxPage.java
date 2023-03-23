@@ -7,7 +7,7 @@ import pages.base.BaseTestPage;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static constants.Constants.TimeOutsVariables.LONG_EXPLICITLY_WAIT;
+import static constants.Constants.TimeOutsVariables.LONG_EXPLICITLY_WAIT5M;
 
 public class InsideMailRuBoxPage extends BaseTestPage {
 
@@ -30,7 +30,7 @@ public class InsideMailRuBoxPage extends BaseTestPage {
     public void readMassageWithSecretCode() {
         driver.switchTo().window(BaseTestPage.mailRuHandle);
         while (true) {
-            if (firstMassage.isDisplayed() && longWaitElementIsVisible(uniqDataFromMassage, LONG_EXPLICITLY_WAIT)
+            if (firstMassage.isDisplayed() && adaptiveWaitElementIsVisible(uniqDataFromMassage, LONG_EXPLICITLY_WAIT5M)
                     .getText().contains("hh.ru")) {
                 firstMassage.click();
                 break;
@@ -42,8 +42,8 @@ public class InsideMailRuBoxPage extends BaseTestPage {
         secretCode = secretCodeElement.getText();
         try {
             while (secretCodeElement.isDisplayed()) {
-                if (secretCodeElement.isDisplayed()) {
-                    actions
+                if (true) {
+                    actions // Удаляет сообщения после получения секретного кода.
                             .sendKeys(Keys.DELETE)
                             .perform();
                     Thread.sleep(700);

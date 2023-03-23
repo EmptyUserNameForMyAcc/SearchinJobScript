@@ -46,10 +46,7 @@ public class SearchingJobScript extends BaseTestPage {
             "Тест"})
     public void searchingScriptTest(String testData) {
         profileHhPage.letsFindAJobYep(testData);
-
         vacancysHhPage.getVacancysDescription();
-        vacancysHhPage.randomWait();
-
         profileHhPage.clearSearchingField();
         System.out.println("крос");
         }

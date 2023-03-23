@@ -17,7 +17,7 @@ public class InsideVacancyHhPage extends BaseTestPage {
     @FindBy(className = "vacancy-description-list-item")
     private WebElement experienceInfo;
 
-    @FindBy(xpath = "//div[@data-qa='vacancy-description']/span")
+    @FindBy(xpath = "//div[@data-qa='vacancy-description']/ul")
     private List<WebElement> vacancyDescription;
 
     @FindBy(xpath = "//div[@class = 'bloko-tag-list']/div/span")
@@ -47,14 +47,15 @@ public class InsideVacancyHhPage extends BaseTestPage {
     public void sortVacancy() {
         //code
         System.out.println("Я ТУТ, В СОРТ МЕТОДЕ!!!");
-
-        for (WebElement descriptionVacancyText : vacancyDescription) {
-            System.out.println(descriptionVacancyText.getText());
+        try {
+            for (WebElement descriptionVacancyText : vacancyDescription) {
+                System.out.println(descriptionVacancyText.getText());
+            }
+        } catch (NullPointerException e) {
+            e.getStackTrace();
+        } finally {
+            driver.close();
+            driver.switchTo().window(BaseTestPage.hhHandle);
         }
-
-        driver.close();
-
-        driver.switchTo().window(BaseTestPage.hhHandle);
-        vacancysHhPage.getVacancysDescription();
     }
 }

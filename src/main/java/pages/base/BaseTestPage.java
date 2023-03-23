@@ -58,8 +58,8 @@ public abstract class BaseTestPage {
         actions = new Actions(driver);
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LOADING_PAGE_WAIT));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT10S));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LOADING_PAGE_WAIT30S));
 
         driver.get(ConfProperties.getProperty("hhUrl"));
         hhHandle = driver.getWindowHandle();
@@ -105,35 +105,35 @@ public abstract class BaseTestPage {
      * Задаёт явное ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (По умолчанию 10 сек.)
      */
     public WebElement waitElementIsVisible(WebElement visibilityOfElement) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME10S))
                 .until(ExpectedConditions.visibilityOf(visibilityOfElement));
         return visibilityOfElement;
     }
 
     /**
-     * Задаёт явное ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (По умолчанию 10 сек.)
+     * Явное ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (По умолчанию 10 сек.)
      */
     public List<WebElement> waitElementsIsVisible(List<WebElement> longVisibilityOfElements) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME10S))
                 .until(ExpectedConditions.visibilityOfAllElements(longVisibilityOfElements));
         return longVisibilityOfElements;
     }
 
     /**
-     * Задаёт явное ДОЛГОЕ ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные
+     * ЗАДАВАЕМОЕ время ожидания для ПОЯВЛЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные
      * значения ожидания.)
      */
-    public WebElement longWaitElementIsVisible(WebElement longWaitElement, short TIME) {
+    public WebElement adaptiveWaitElementIsVisible(WebElement longWaitElement, short TIME) {
         new WebDriverWait(driver, Duration.ofSeconds(TIME))
                 .until(ExpectedConditions.visibilityOf(longWaitElement));
         return longWaitElement;
     }
 
     /**
-     * Задаёт явное ДОЛГОЕ ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (Позволяет задавать произвольные
+     * ЗАДАВАЕМОЕ время ожидания для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (Позволяет задавать произвольные
      * значения ожидания.)
      */
-    public List<WebElement> longWaitElementsIsVisible(List<WebElement> visibilityOElements, short TIME) {
+    public List<WebElement> adaptiveWaitElementsIsVisible(List<WebElement> visibilityOElements, short TIME) {
         new WebDriverWait(driver, Duration.ofSeconds(TIME))
                 .until(ExpectedConditions.visibilityOfAllElements(visibilityOElements));
         return visibilityOElements;
@@ -143,25 +143,25 @@ public abstract class BaseTestPage {
      * Ожидание ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (По умолчанию 10 сек.)
      */
     public WebElement waitInvisibilityOfElement(WebElement invisOfElement) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT))
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME10S))
                 .until(ExpectedConditions.invisibilityOf(invisOfElement));
         return invisOfElement;
     }
 
     /**
-     * ДОЛГОЕ ожидание ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные значения ожидания.)
+     * ЗАДАВАЕМОЕ ожидание времени ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (Позволяет задавать произвольные значения ожидания.)
      */
-    public WebElement LongWaitInvisibilityOfElement(WebElement invisOfElement, short TIME) {
+    public WebElement adaptiveWaitInvisibilityOfElement(WebElement invisOfElement, short TIME) {
         new WebDriverWait(driver, Duration.ofSeconds(TIME))
                 .until(ExpectedConditions.invisibilityOf(invisOfElement));
         return invisOfElement;
     }
 
     /**
-     * ДОЛГОЕ ожидание ИСЧЕЗНОВЕНИЯ МНОЖЕСТВА элементов. (Позволяет задавать произвольные значения ожидания.)
+     * ЗАДАВАЕМОЕ ожидание времени ИСЧЕЗНОВЕНИЯ МНОЖЕСТВА элементов. (Позволяет задавать произвольные значения ожидания.)
      */
-    public List<WebElement> longWaitInvisibilityOfElements(List<WebElement> invisOfElements) {
-        new WebDriverWait(driver, Duration.ofSeconds(LONG_EXPLICITLY_WAIT))
+    public List<WebElement> adaptiveWaitInvisibilityOfElements(List<WebElement> invisOfElements) {
+        new WebDriverWait(driver, Duration.ofSeconds(LONG_EXPLICITLY_WAIT5M))
                 .until(ExpectedConditions.invisibilityOfAllElements());
         return invisOfElements;
     }
@@ -186,7 +186,7 @@ public abstract class BaseTestPage {
      */
     public void randomWait() {
         try {
-            Thread.sleep((short) Constants.TimeOutsVariables.RANDOM_WAIT);
+            Thread.sleep((short) Constants.TimeOutsVariables.RANDOM_WAIT_TO4S);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -197,5 +197,4 @@ public abstract class BaseTestPage {
      * КОНЕЦ БЛОКА РАНДОМА
      *
      **/
-
 }
