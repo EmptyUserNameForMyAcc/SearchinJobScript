@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static constants.Constants.TimeOutsVariables.*;
 
 import pages.HhClasses.*;
 import pages.MailRuClasses.InsideMailRuBoxPage;
@@ -28,9 +29,8 @@ import java.time.Duration;
 
 import java.util.List;
 
-import static constants.Constants.TimeOutsVariables.*;
 
-public abstract class BaseTestPage {
+public class BaseTestPage {
 
     public static WebDriver driver;
 
@@ -58,7 +58,7 @@ public abstract class BaseTestPage {
         actions = new Actions(driver);
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT10S));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT5S));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LOADING_PAGE_WAIT30S));
 
         driver.get(ConfProperties.getProperty("hhUrl"));
@@ -92,12 +92,9 @@ public abstract class BaseTestPage {
         driver.get(url);
     }
 
-    /**
-     *
+    /* *
      *
      * НАЧАЛО БЛОКА ОЖИДАНИЯ ПОЯВЛЕНИЯ И ИСЧЕСЗОВЕНИЯ ЭЛЕМЕНТОВ.
-     *
-     *
      *
      */
 
@@ -166,11 +163,9 @@ public abstract class BaseTestPage {
         return invisOfElements;
     }
 
-    /**
-     *
+    /* *
      *
      * КОНЕЦ БЛОКА С МЕТОДАМИ ОЖИДАНИЯ.
-     *
      *
      * */
 

@@ -44,18 +44,20 @@ public class InsideVacancyHhPage extends BaseTestPage {
     @FindBy(xpath = "//a[@data-qa = 'vacancy-response-link-view-topic']/span")
     private WebElement buttonAfterSentCv; // For check changes in button text.
 
-    public void sortVacancy() {
-        //code
+    public InsideVacancyHhPage sortVacancy() {
         System.out.println("Я ТУТ, В СОРТ МЕТОДЕ!!!");
-        try {
-            for (WebElement descriptionVacancyText : vacancyDescription) {
-                System.out.println(descriptionVacancyText.getText());
-            }
-        } catch (NullPointerException e) {
-            e.getStackTrace();
-        } finally {
-            driver.close();
-            driver.switchTo().window(BaseTestPage.hhHandle);
+        driver.switchTo().window(vacancyHandle);
+
+        for (WebElement descriptionVacancyText : vacancyDescription) {
+            System.out.println(descriptionVacancyText.getText());
         }
+        try {
+            Thread.sleep(300);
+            driver.close();
+            driver.switchTo().window(hhHandle);
+        } catch (InterruptedException e) {
+            e.getCause().getStackTrace();
+        }
+        return insideVacancyHhPage;
     }
 }
