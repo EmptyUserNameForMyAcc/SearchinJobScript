@@ -29,21 +29,25 @@ public class SignInMailRuPopUp extends BaseTestPage {
     @FindBy(xpath = "//span[contains(@class, 'innerTextWrapper')]")
     private WebElement submitSignInButton;
 
-    public void inputLogin() {
+    public SignInMailRuPopUp inputLogin() {
         driver.switchTo().frame(signInIFrame);
         waitElementIsVisible(loginFields).sendKeys(ConfProperties.getProperty("mailRuLogin"));
+        return this;
     }
 
-    public void submitLogin() {
+    public SignInMailRuPopUp submitLogin() {
         waitElementIsVisible(submitLogin).click();
+        return this;
     }
 
-    public void inputPassword() {
+    public SignInMailRuPopUp inputPassword() {
         waitElementIsVisible(passwordField).sendKeys(ConfProperties.getProperty("mailRuPass"));
+        return this;
     }
 
-    public void submitPassword() {
+    public SignInMailRuPopUp submitPassword() {
         waitElementIsVisible(submitSignInButton).click();
+        return this;
     }
 
 }

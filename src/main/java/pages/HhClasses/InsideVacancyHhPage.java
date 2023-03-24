@@ -58,6 +58,6 @@ public class InsideVacancyHhPage extends BaseTestPage {
         } catch (InterruptedException e) {
             e.getCause().getStackTrace();
         }
-        return insideVacancyHhPage;
+        return this;
     }
 }

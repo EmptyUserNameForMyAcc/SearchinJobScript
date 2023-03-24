@@ -27,7 +27,7 @@ public class InsideMailRuBoxPage extends BaseTestPage {
     @FindBy(xpath = "//p/b")
     private WebElement secretCodeElement;
 
-    public void readMassageWithSecretCode() {
+    public InsideMailRuBoxPage readMassageWithSecretCode() {
         driver.switchTo().window(mailRuHandle);
         while (true) {
             if (firstMassage.isDisplayed() && adaptiveWaitElementIsVisible(uniqDataFromMassage, LONG_EXPLICITLY_WAIT5M)
@@ -36,9 +36,10 @@ public class InsideMailRuBoxPage extends BaseTestPage {
                 break;
             }
         }
+        return this;
     }
 
-    public void getSecretCode() {
+    public InsideMailRuBoxPage getSecretCode() {
         secretCode = secretCodeElement.getText();
         try {
             while (secretCodeElement.isDisplayed()) {
@@ -53,5 +54,6 @@ public class InsideMailRuBoxPage extends BaseTestPage {
             serensex.getStackTrace();
         }
         driver.close();
+        return this;
     }
 }

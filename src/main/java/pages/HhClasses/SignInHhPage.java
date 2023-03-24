@@ -29,18 +29,21 @@ public class SignInHhPage extends BaseTestPage {
     @FindBy(xpath = "//button[@data-qa = 'otp-code-submit']")
     private WebElement submitEnteringData;
 
-    public void sendLoginData() {
+    public SignInHhPage sendLoginData() {
         loginField.sendKeys(ConfProperties.getProperty("mailRuLogin"));
+        return this;
     }
 
-    public void submitSignInData() {
+    public SignInHhPage submitSignInData() {
         actions
                 .clickAndHold(waitElementIsVisible(submitEnteringData));
+        return this;
     }
 
-    public void sendPasswordDataAndSubmit() {
+    public SignInHhPage sendPasswordDataAndSubmit() {
         driver.switchTo().window(BaseTestPage.hhHandle);
         waitElementIsVisible(passwordFiled).sendKeys(secretCode);
         submitEnteringData.click();
+        return this;
     }
 }
