@@ -15,8 +15,9 @@ public class MainHhPage extends BaseTestPage {
     @FindBy(xpath = "//a[@data-qa = 'login']")
     private WebElement redirectToInputSignInData;
 
-    public void clickAndLetsSignIn() {
+    public MainHhPage clickAndLetsSignIn() {
         driver.switchTo().window(BaseTestPage.hhHandle);
         redirectToInputSignInData.click();
+        return this;
     }
 }

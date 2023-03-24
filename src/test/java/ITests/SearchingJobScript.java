@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import pages.base.BaseTestPage;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class SearchingJobScript extends BaseTestPage {
+public class SearchingJobScript extends BaseTestPage{
     /**
      * Данный тест проводит авторизацию на двух сервисах: Hh.ru и Mail.ru.
      */
@@ -15,23 +15,30 @@ public class SearchingJobScript extends BaseTestPage {
     @Order(1)
     @Test
     public void authorizationTest() {
-        mainHhPage.clickAndLetsSignIn();
+        mainHhPage
+                .clickAndLetsSignIn();
 
-        signInHhPage.sendLoginData();
-        signInHhPage.submitLogin();
+        signInHhPage
+                .sendLoginData()
+                .submitLogin();
 
-        mainMailRuPage.goToSignIn();
+        mainMailRuPage
+                .goToSignIn();
 
-        signInMailRuPopUp.inputLogin();
-        signInMailRuPopUp.submitLogin();
-        signInMailRuPopUp.inputPassword();
-        signInMailRuPopUp.submitPassword();
+        signInMailRuPopUp
+                .inputLogin()
+                .submitLogin()
+                .inputPassword()
+                .submitPassword();
 
-        insideMailRuBoxPage.readMassageWithSecretCode();
-        insideMailRuBoxPage.getSecretCode();
+        insideMailRuBoxPage
+                .readMassageWithSecretCode()
+                .getSecretCode();
 
-        signInHhPage.sendPasswordDataAndSubmit();
-        signInHhPage.submitSignInData();
+        signInHhPage
+                .sendPasswordDataAndSubmit()
+                .submitSignInData();
+
         System.out.println("крос");
     }
 
@@ -45,10 +52,18 @@ public class SearchingJobScript extends BaseTestPage {
             "Автоматизации тестирования", "AQA", "QA инженер", "QA engineer", "QA Engineer Automation", "Qa Java",
             "Тест"})
     public void searchingScriptTest(String testData) {
-        profileHhPage.letsFindAJobYep(testData);
-        vacancysHhPage.getVacancysDescription();
-        insideVacancyHhPage.sortVacancy();
-        profileHhPage.clearSearchingField();
+        profileHhPage
+                .letsFindAJobYep(testData);
+
+        vacancysHhPage
+                .getVacancysDescription();
+
+        insideVacancyHhPage
+                .sortVacancy();
+
+        profileHhPage
+                .clearSearchingField();
+
         System.out.println("крос");
     }
 }

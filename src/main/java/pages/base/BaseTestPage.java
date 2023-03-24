@@ -92,7 +92,7 @@ public class BaseTestPage {
         driver.get(url);
     }
 
-    /* *
+    /**
      *
      * НАЧАЛО БЛОКА ОЖИДАНИЯ ПОЯВЛЕНИЯ И ИСЧЕСЗОВЕНИЯ ЭЛЕМЕНТОВ.
      *
@@ -163,7 +163,7 @@ public class BaseTestPage {
         return invisOfElements;
     }
 
-    /* *
+    /**
      *
      * КОНЕЦ БЛОКА С МЕТОДАМИ ОЖИДАНИЯ.
      *
