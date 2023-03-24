@@ -2,7 +2,7 @@ package constants;
 
 public class Constants {
     public static class TimeOutsVariables {
-        public static final byte IMPLICITLY_WAIT10S = 10;
+        public static final byte IMPLICITLY_WAIT5S = 5;
         public static final byte LOADING_PAGE_WAIT30S = 30;
         public static final byte EXPLICITLY_WAIT_TIME10S = 10;
         public static final short LONG_EXPLICITLY_WAIT5M = 300;

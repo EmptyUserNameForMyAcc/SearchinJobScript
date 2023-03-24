@@ -20,12 +20,10 @@ public class VacancysHhPage extends BaseTestPage {
     public void getVacancysDescription() {
         try {
             for (WebElement oneVacancy : vacancysTitle) {
-                String vacacyUrl = oneVacancy.getAttribute("href");
-                System.out.println(vacacyUrl);
-
-                driver.switchTo().newWindow(WindowType.TAB).navigate().to(vacacyUrl);
+                String vacancyUrl = oneVacancy.getAttribute("href");
+//                System.out.println(vacancyUrl);
+                driver.switchTo().newWindow(WindowType.TAB).navigate().to(vacancyUrl);
                 vacancyHandle = driver.getWindowHandle();
-                System.out.println("Я ID вакансии " + vacancyHandle + "\n" + "Я ID Hh " + hhHandle);
                 insideVacancyHhPage.sortVacancy();
             }
         } catch (TimeoutException e) {

@@ -28,7 +28,7 @@ public class InsideMailRuBoxPage extends BaseTestPage {
     private WebElement secretCodeElement;
 
     public void readMassageWithSecretCode() {
-        driver.switchTo().window(BaseTestPage.mailRuHandle);
+        driver.switchTo().window(mailRuHandle);
         while (true) {
             if (firstMassage.isDisplayed() && adaptiveWaitElementIsVisible(uniqDataFromMassage, LONG_EXPLICITLY_WAIT5M)
                     .getText().contains("hh.ru")) {
@@ -42,8 +42,8 @@ public class InsideMailRuBoxPage extends BaseTestPage {
         secretCode = secretCodeElement.getText();
         try {
             while (secretCodeElement.isDisplayed()) {
-                if (true) {
-                    actions // Удаляет сообщения после получения секретного кода.
+                if (secretCodeElement.isDisplayed()) {
+                    actions // Удаляет сообщения от Hh после получения секретного кода.
                             .sendKeys(Keys.DELETE)
                             .perform();
                     Thread.sleep(700);

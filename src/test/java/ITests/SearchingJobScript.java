@@ -14,7 +14,7 @@ public class SearchingJobScript extends BaseTestPage {
     @Tag("authorizationTest")
     @Order(1)
     @Test
-    public void authorizationTest() throws InterruptedException {
+    public void authorizationTest() {
         mainHhPage.clickAndLetsSignIn();
 
         signInHhPage.sendLoginData();
@@ -41,13 +41,14 @@ public class SearchingJobScript extends BaseTestPage {
     @Tag("SearchingJobScript")
     @Order(2)
     @ParameterizedTest
-    @ValueSource(strings = {"QA Automation Engineer", "Тестировщик", "Автотестировщик", "Автоматическому тестированию",
+    @ValueSource(strings = {"разработчик", "программист", "QA Automation Engineer", "Тестировщик", "Автотестировщик", "Автоматическому тестированию",
             "Автоматизации тестирования", "AQA", "QA инженер", "QA engineer", "QA Engineer Automation", "Qa Java",
             "Тест"})
     public void searchingScriptTest(String testData) {
         profileHhPage.letsFindAJobYep(testData);
         vacancysHhPage.getVacancysDescription();
+        insideVacancyHhPage.sortVacancy();
         profileHhPage.clearSearchingField();
         System.out.println("крос");
-        }
+    }
 }
