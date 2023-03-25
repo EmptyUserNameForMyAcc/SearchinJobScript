@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 public class InsideVacancyHhPage extends BaseTestPage {
@@ -48,15 +49,15 @@ public class InsideVacancyHhPage extends BaseTestPage {
         System.out.println("Я ТУТ, В СОРТ МЕТОДЕ!!!");
         driver.switchTo().window(vacancyHandle);
 
-        for (WebElement descriptionVacancyText : vacancyDescription) {
+        for (WebElement descriptionVacancyText : waitElementsIsVisible(vacancyDescription)) {
             System.out.println(descriptionVacancyText.getText());
         }
         try {
-            Thread.sleep(300);
+            Thread.sleep(1000);
             driver.close();
-            driver.switchTo().window(hhHandle);
+
         } catch (InterruptedException e) {
-            e.getCause().getStackTrace();
+            throw new RuntimeException(e);
         }
         return this;
     }

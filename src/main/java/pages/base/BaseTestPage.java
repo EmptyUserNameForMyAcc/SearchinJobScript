@@ -30,16 +30,16 @@ import java.time.Duration;
 import java.util.List;
 
 
-public class BaseTestPage {
+public abstract class BaseTestPage {
 
     public static WebDriver driver;
 
-    public MainHhPage mainHhPage;
-    public SignInHhPage signInHhPage;
-    public ProfileHhPage profileHhPage;
-    public VacancysHhPage vacancysHhPage;
-    public OtherCountryHhPopUp otherCountryHhPopUp;
-    public InsideVacancyHhPage insideVacancyHhPage;
+    public static MainHhPage mainHhPage;
+    public static SignInHhPage signInHhPage;
+    public static ProfileHhPage profileHhPage;
+    public static VacancysHhPage vacancysHhPage;
+    public static OtherCountryHhPopUp otherCountryHhPopUp;
+    public static InsideVacancyHhPage insideVacancyHhPage;
 
     public MainMailRuPage mainMailRuPage;
     public SignInMailRuPopUp signInMailRuPopUp;
@@ -84,7 +84,6 @@ public class BaseTestPage {
 
     @AfterAll
     public static void tearDown() {
-        driver.close();
         driver.quit();
     }
 
