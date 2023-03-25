@@ -29,12 +29,16 @@ public class InsideMailRuBoxPage extends BaseTestPage {
 
     public InsideMailRuBoxPage readMassageWithSecretCode() {
         driver.switchTo().window(mailRuHandle);
-        while (true) {
-            if (firstMassage.isDisplayed() && adaptiveWaitElementIsVisible(uniqDataFromMassage, LONG_EXPLICITLY_WAIT5M)
-                    .getText().contains("hh.ru")) {
-                firstMassage.click();
-                break;
+        try {
+            while (true) {
+                if (firstMassage.isDisplayed() && adaptiveWaitElementIsVisible(uniqDataFromMassage, LONG_EXPLICITLY_WAIT5M)
+                        .getText().contains("hh.ru")) {
+                    firstMassage.click();
+                    break;
+                }
             }
+        } catch (TimeoutException e) {
+            e.getStackTrace();
         }
         return this;
     }

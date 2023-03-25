@@ -15,8 +15,7 @@ public class SearchingJobScript extends BaseTestPage{
     @Order(1)
     @Test
     public void authorizationTest() {
-        mainHhPage
-                .clickAndLetsSignIn();
+        mainHhPage.clickAndLetsSignIn();
 
         signInHhPage
                 .sendLoginData()
@@ -52,17 +51,13 @@ public class SearchingJobScript extends BaseTestPage{
             "Автоматизации тестирования", "AQA", "QA инженер", "QA engineer", "QA Engineer Automation", "Qa Java",
             "Тест"})
     public void searchingScriptTest(String testData) {
-        profileHhPage
-                .letsFindAJobYep(testData);
+        profileHhPage.letsFindAJobYep(testData);
 
-        vacancysHhPage
-                .getVacancysDescription();
+        vacancysHhPage.goToVacancyForOne();
 
-        insideVacancyHhPage
-                .sortVacancy();
+        insideVacancyHhPage.sortVacancy();
 
-        profileHhPage
-                .clearSearchingField();
+        profileHhPage.clearSearchingField();
 
         System.out.println("крос");
     }

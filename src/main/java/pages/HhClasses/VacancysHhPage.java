@@ -17,13 +17,16 @@ public class VacancysHhPage extends BaseTestPage {
     @FindBy(xpath = "//h3//a")
     private List<WebElement> vacancysTitle;
 
-    public void getVacancysDescription() {
+    public void goToVacancyForOne() {
         try {
             for (WebElement oneVacancy : vacancysTitle) {
+                driver.switchTo().window(hhHandle);
                 String vacancyUrl = oneVacancy.getAttribute("href");
-//                System.out.println(vacancyUrl);
+                System.out.println(vacancyUrl);
+
                 driver.switchTo().newWindow(WindowType.TAB).navigate().to(vacancyUrl);
                 vacancyHandle = driver.getWindowHandle();
+
                 insideVacancyHhPage.sortVacancy();
             }
         } catch (TimeoutException e) {
