@@ -59,7 +59,7 @@ public abstract class BaseTestPage {
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(IMPLICITLY_WAIT5S));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LOADING_PAGE_WAIT30S));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LOADING_PAGE_WAIT30m));
 
         driver.get(ConfProperties.getProperty("hhUrl"));
         hhHandle = driver.getWindowHandle();

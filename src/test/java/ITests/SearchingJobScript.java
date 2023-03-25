@@ -53,9 +53,7 @@ public class SearchingJobScript extends BaseTestPage{
     public void searchingScriptTest(String testData) {
         profileHhPage.letsFindAJobYep(testData);
 
-        vacancysHhPage.goToVacancyForOne();
-
-        insideVacancyHhPage.sortVacancy();
+        vacancysHhPage.goToVacancyForOneAndSortThat();
 
         profileHhPage.clearSearchingField();
 

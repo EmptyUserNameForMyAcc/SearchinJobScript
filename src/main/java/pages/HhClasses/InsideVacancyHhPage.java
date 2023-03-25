@@ -2,13 +2,22 @@ package pages.HhClasses;
 
 import pages.base.BaseTestPage;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+
+import static constants.Constants.BoolVariables.*;
+
+import static constants.Constants.TimeOutsVariables.countMatch;
+
+import static constants.Constants.TextVariables.COVERING_TEXT;
+import static constants.Constants.TextVariables.gradesChoice;
+import static constants.Constants.TextVariables.requirementDescription;
 
 public class InsideVacancyHhPage extends BaseTestPage {
 
@@ -47,7 +56,7 @@ public class InsideVacancyHhPage extends BaseTestPage {
     private WebElement buttonAfterSentCv; // For check changes in button text.
 
     /**
-     * Толстенький метод проверяющий содержимое на соответствие заданным кличевым словам.
+     * Толстенький метод проверяющий содержимое на соответствие заданным ключевым словам.
      * <p>
      * А именно:
      * Java && ( Automation || tests || development || Maven || TestNG || Junit || Docker || тестирования ||
@@ -57,67 +66,43 @@ public class InsideVacancyHhPage extends BaseTestPage {
      */
     public InsideVacancyHhPage sortVacancy() {
         driver.switchTo().window(vacancyHandle);
-        String requirementDescription = null;
 
-        for (WebElement descriptionVacancyText : waitElementsIsVisible(vacancyDescription)) {
-            requirementDescription += descriptionVacancyText.getText().toLowerCase();
+        boolean isLessThen6Years = !(waitElementIsVisible(experienceInfo).getText().equals("более 6 лет"));
+        requirementDescription = " ";
+        countMatch = 0;
+
+        for (WebElement descriptionVacancyText : vacancyDescription) {
+            requirementDescription += descriptionVacancyText.getText()
+                    .toLowerCase()
+                    .replace("null", " ")
+                    .replace("\n", " ");
         }
         try {
-            byte countMatch = 0;
             Assertions.assertNotNull(requirementDescription);
-            if (!requirementDescription.contains("java")) {
-                hideVacancy();
-            } else if (requirementDescription.contains("java")) {
-                countMatch++;
-            } else if (requirementDescription.contains("junit")) {
-                countMatch++;
-            } else if (requirementDescription.contains("docker")) {
-                countMatch++;
-            } else if (requirementDescription.contains("maven")) {
-                countMatch++;
-            } else if (requirementDescription.contains("xpath")) {
-                countMatch++;
-            } else if (requirementDescription.contains("selenium")
-                    || requirementDescription.contains("selenoid")
-                    || requirementDescription.contains("selenide")) {
-                countMatch++;
-            } else if (requirementDescription.contains("git")
-                    || requirementDescription.contains("github")
-                    || requirementDescription.contains("gitlab")
-                    || requirementDescription.contains("bitbucket")) {
-                countMatch++;
-            } else if (requirementDescription.contains("agile")) {
-                countMatch++;
-            } else if (requirementDescription.contains("scrum")) {
-                countMatch++;
-            } else if (requirementDescription.contains("intellijIDEA")
-                    || requirementDescription.contains("intellij idea")) {
-                countMatch++;
-            } else if (requirementDescription.contains("автоматизации")
-                    || requirementDescription.contains("автоматизация")
-                    || requirementDescription.contains("автоматизированного")
-                    || requirementDescription.contains("автоматизирование")
-                    || requirementDescription.contains("автоматизированное")
-                    || requirementDescription.contains("automation")) {
-                countMatch++;
-            } else if (requirementDescription.contains("sql")
-                    || requirementDescription.contains("mysql")) {
-                countMatch++;
-            }
-            if (countMatch > 5) {
 
+            for (String gradeOfChoice : gradesChoice) {
+                if (requirementDescription.contains(gradeOfChoice)) {
+                    countMatch++;
+                }
             }
-            Thread.sleep(1000);
-            driver.close();
+
+            System.out.println(requirementDescription + "\n" + IS_AUTOMATION + " я автоматизация\n"
+                    + isLessThen6Years + " я меньше шести лет");
+
+            if (IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5 && isLessThen6Years) {
+                insideVacancyHhPage
+                        .sentCvOnVacancy()
+                        .openConvertingLetter()
+                        .pasteConvertingMassage()
+                        .sentCoveringMassage();
+            } else {
+                hideVacancy();
+                Thread.sleep(1000);
+                driver.close();
+            }
+
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
-        return this;
-    }
-
-    public InsideVacancyHhPage hideVacancyIfExperienceMore6Years() {
-        if (experienceInfo.getText().equals("более 6 лет")) {
-            hideVacancy();
         }
         return this;
     }
@@ -128,8 +113,23 @@ public class InsideVacancyHhPage extends BaseTestPage {
         return this;
     }
 
+    public InsideVacancyHhPage sentCvOnVacancy() {
+        sentCvButton.click();
+        return this;
+    }
+
     public InsideVacancyHhPage openConvertingLetter() {
         openCoveringLetterButton.click();
+        return this;
+    }
+
+    public InsideVacancyHhPage pasteConvertingMassage() {
+        coveringLetterField.sendKeys(COVERING_TEXT);
+        return this;
+    }
+
+    public InsideVacancyHhPage sentCoveringMassage() {
+        sentCoveringLetterButton.click();
         return this;
     }
 }
