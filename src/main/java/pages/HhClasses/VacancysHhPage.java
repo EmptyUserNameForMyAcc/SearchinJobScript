@@ -27,7 +27,10 @@ public class VacancysHhPage extends BaseTestPage {
                 driver.switchTo().newWindow(WindowType.TAB).navigate().to(vacancyUrl);
                 vacancyHandle = driver.getWindowHandle();
 
-                insideVacancyHhPage.sortVacancy();
+                insideVacancyHhPage
+                        .hideVacancyIfExperienceMore6Years()
+                        .sortVacancy()
+                        .openConvertingLetter();
             }
         } catch (TimeoutException e) {
             e.getCause().getStackTrace();
