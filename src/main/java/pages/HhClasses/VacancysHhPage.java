@@ -1,5 +1,6 @@
 package pages.HhClasses;
 
+import org.junit.jupiter.api.Assertions;
 import pages.base.BaseTestPage;
 
 import org.openqa.selenium.*;
@@ -7,6 +8,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+
+import static constants.Constants.TextVariables.nextPage;
 
 public class VacancysHhPage extends BaseTestPage {
 
@@ -20,26 +23,38 @@ public class VacancysHhPage extends BaseTestPage {
     @FindBy(xpath = "//a[@data-qa='pager-next']")
     private WebElement nextButton;
 
-    public void goToVacancyForOneAndSortThat() {
+    public void goToVacancyAndSortThatForOne() {
         try {
-            short iterCounter = 0;
-            for (WebElement oneVacancy : vacancysTitle) {
+            short vacancyCounter = 0;
+            boolean isVacancysOnThePageIsOver = vacancysTitle.size() == vacancyCounter;
+            boolean isAllPageIsOver = !(waitElementIsVisible(nextButton).isDisplayed());
+
+            for (WebElement oneVacancy : waitElementsIsVisible(vacancysTitle)) {
                 driver.switchTo().window(hhHandle);
 
-                iterCounter++;
-                if (vacancysTitle.size() == iterCounter && vacancysTitle.size() != 6) {
-                    iterCounter = 0;
-                    nextButton.click();
+                String vacancyUrl = "";
+                vacancyCounter++;
+
+                if (isVacancysOnThePageIsOver) {
+                    vacancyCounter = 0;
+                    nextPage = nextButton.getAttribute("href");
+                    open(nextPage);
+                    goToVacancyAndSortThatForOne();
+
+                    System.out.println(vacancysTitle.size());
+                } else if (isAllPageIsOver) {
+                    profileHhPage.clearSearchingField();
+                    Assertions.fail("Test finished successfully!");
                 }
-                String vacancyUrl = oneVacancy.getAttribute("href");
+
+                System.out.println(vacancyCounter + "<- я short каунтер - я инт сайз ->  " + vacancysTitle.size());
+
+                vacancyUrl = waitElementIsVisible(oneVacancy).getAttribute("href");
                 System.out.println(vacancyUrl);
-
-                driver.switchTo().newWindow(WindowType.TAB).navigate().to(vacancyUrl);
+                openInNewTab(vacancyUrl);
                 vacancyHandle = driver.getWindowHandle();
-
-                System.out.println(iterCounter + "<- я short каунтер - я инт сайз->  " + vacancysTitle.size());
-
                 insideVacancyHhPage.sortVacancy();
+
             }
         } catch (TimeoutException e) {
             throw new RuntimeException(e);

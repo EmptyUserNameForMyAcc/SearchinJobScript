@@ -37,7 +37,8 @@ public class InsideMailRuBoxPage extends BaseTestPage {
                     break;
                 }
             }
-        } catch (TimeoutException e) {
+        } catch (TimeoutException | NoSuchElementException e) {
+            readMassageWithSecretCode();
             e.getStackTrace();
         }
         return this;

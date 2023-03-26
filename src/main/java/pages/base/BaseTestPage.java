@@ -38,7 +38,7 @@ public abstract class BaseTestPage {
     public static SignInHhPage signInHhPage;
     public static ProfileHhPage profileHhPage;
     public static VacancysHhPage vacancysHhPage;
-    public static OtherCountryHhPopUp otherCountryHhPopUp;
+    public static SentCvPopUp sentCvPopUp;
     public static InsideVacancyHhPage insideVacancyHhPage;
 
     public MainMailRuPage mainMailRuPage;
@@ -75,7 +75,7 @@ public abstract class BaseTestPage {
         profileHhPage = new ProfileHhPage();
         vacancysHhPage = new VacancysHhPage();
         insideVacancyHhPage = new InsideVacancyHhPage();
-        otherCountryHhPopUp = new OtherCountryHhPopUp();
+        sentCvPopUp = new SentCvPopUp();
 
         mainMailRuPage = new MainMailRuPage();
         signInMailRuPopUp = new SignInMailRuPopUp();
@@ -87,8 +87,12 @@ public abstract class BaseTestPage {
         driver.quit();
     }
 
+    public void openInNewTab(String url) {
+        driver.switchTo().newWindow(WindowType.TAB).navigate().to(url);
+    }
+
     public void open(String url) {
-        driver.get(url);
+        driver.navigate().to(url);
     }
 
     /**
@@ -101,7 +105,7 @@ public abstract class BaseTestPage {
      * Задаёт явное ожидание для ПОЯВЛЕНИЯ ОДНОГО элемента. (По умолчанию 10 сек.)
      */
     public WebElement waitElementIsVisible(WebElement visibilityOfElement) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME10S))
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME25S))
                 .until(ExpectedConditions.visibilityOf(visibilityOfElement));
         return visibilityOfElement;
     }
@@ -110,7 +114,7 @@ public abstract class BaseTestPage {
      * Явное ожидание для ПОЯВЛЕНИЯ МНОЖЕСТВА элементов. (По умолчанию 10 сек.)
      */
     public List<WebElement> waitElementsIsVisible(List<WebElement> longVisibilityOfElements) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME10S))
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME25S))
                 .until(ExpectedConditions.visibilityOfAllElements(longVisibilityOfElements));
         return longVisibilityOfElements;
     }
@@ -139,7 +143,7 @@ public abstract class BaseTestPage {
      * Ожидание ИСЧЕЗНОВЕНИЯ ОДНОГО элемента. (По умолчанию 10 сек.)
      */
     public WebElement waitInvisibilityOfElement(WebElement invisOfElement) {
-        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME10S))
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICITLY_WAIT_TIME25S))
                 .until(ExpectedConditions.invisibilityOf(invisOfElement));
         return invisOfElement;
     }

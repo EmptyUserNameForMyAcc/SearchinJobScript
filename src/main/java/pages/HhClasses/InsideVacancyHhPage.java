@@ -10,14 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
-import static constants.Constants.BoolVariables.*;
-
+import static constants.Constants.BoolVariables.IS_AUTOMATION;
+import static constants.Constants.TextVariables.*;
 import static constants.Constants.TimeOutsVariables.countMatch;
-
-import static constants.Constants.TextVariables.COVERING_TEXT;
-import static constants.Constants.TextVariables.gradesChoice;
-import static constants.Constants.TextVariables.requirementDescription;
 
 public class InsideVacancyHhPage extends BaseTestPage {
 
@@ -69,6 +64,7 @@ public class InsideVacancyHhPage extends BaseTestPage {
 
         boolean isLessThen6Years = !(waitElementIsVisible(experienceInfo).getText().equals("более 6 лет"));
         requirementDescription = " ";
+        IS_AUTOMATION = false;
         countMatch = 0;
 
         for (WebElement descriptionVacancyText : vacancyDescription) {
@@ -77,30 +73,53 @@ public class InsideVacancyHhPage extends BaseTestPage {
                     .replace("null", " ")
                     .replace("\n", " ");
         }
-        try {
-            Assertions.assertNotNull(requirementDescription);
+        Assertions.assertNotNull(requirementDescription);
 
-            for (String gradeOfChoice : gradesChoice) {
-                if (requirementDescription.contains(gradeOfChoice)) {
+        for (String containsValue : IS_AUTOMATION_REQUIREMENT) {
+            if (requirementDescription.contains(containsValue)) {
+                IS_AUTOMATION = true;
+                break;
+            }
+        }
+
+        try {
+            for (String oneGrade : gradesOfChoice) {
+                if (requirementDescription.contains(oneGrade)) {
                     countMatch++;
+                    System.out.println(oneGrade + " -> я удовлетворённое требование и содержусь в тексте");
                 }
             }
 
-            System.out.println(requirementDescription + "\n" + IS_AUTOMATION + " я автоматизация\n"
-                    + isLessThen6Years + " я меньше шести лет");
+            boolean IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5 =
+                    countMatch >= 4
+                            && requirementDescription.contains("java")
+                            && !(requirementDescription.contains("javascript"))
+                            && IS_AUTOMATION;
+
+            System.out.println(
+                    "я описываю всю вакансию -> " + requirementDescription + "\n"
+                            + "\n я автоматизация -> " + IS_AUTOMATION
+                            + "\n я меньше шести лет -> " + isLessThen6Years
+                            + "\n а я бул для матчей -> " + IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5
+                            + "\n я матч счётчик -> " + countMatch
+                            + "\n я требование на Java -> " + requirementDescription.contains("java")
+                            + "\n я требование на !JS -> " + !(requirementDescription.contains("javascript")));
 
             if (IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5 && isLessThen6Years) {
-                insideVacancyHhPage
-                        .sentCvOnVacancy()
-                        .openConvertingLetter()
-                        .pasteConvertingMassage()
-                        .sentCoveringMassage();
+                sentCvOnVacancy();
+
+                sentCvPopUp
+                        .letsChooseCv()
+                        .openCoveringField()
+                        .inputCoveringText()
+                        .sentCvWithCoveringMassage();
+                Thread.sleep(1000);
+                driver.close();
             } else {
                 hideVacancy();
                 Thread.sleep(1000);
                 driver.close();
             }
-
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
