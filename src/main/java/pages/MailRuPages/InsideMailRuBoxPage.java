@@ -1,4 +1,4 @@
-package pages.MailRuClasses;
+package pages.MailRuPages;
 
 import org.openqa.selenium.*;
 
@@ -37,7 +37,8 @@ public class InsideMailRuBoxPage extends BaseTestPage {
                     break;
                 }
             }
-        } catch (TimeoutException e) {
+        } catch (TimeoutException | NoSuchElementException e) {
+            readMassageWithSecretCode();
             e.getStackTrace();
         }
         return this;

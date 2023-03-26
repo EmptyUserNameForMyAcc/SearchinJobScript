@@ -47,15 +47,13 @@ public class SearchingJobScript extends BaseTestPage{
     @Tag("SearchingJobScript")
     @Order(2)
     @ParameterizedTest
-    @ValueSource(strings = {"разработчик", "программист", "QA Automation Engineer", "Тестировщик", "Автотестировщик", "Автоматическому тестированию",
+    @ValueSource(strings = {"QA Automation Engineer", "Тестировщик", "Автотестировщик", "Автоматическому тестированию",
             "Автоматизации тестирования", "AQA", "QA инженер", "QA engineer", "QA Engineer Automation", "Qa Java",
             "Тест"})
     public void searchingScriptTest(String testData) {
         profileHhPage.letsFindAJobYep(testData);
 
-        vacancysHhPage.goToVacancyForOne();
-
-        insideVacancyHhPage.sortVacancy();
+        vacancysHhPage.goToVacancyAndSortThatForOne();
 
         profileHhPage.clearSearchingField();
 

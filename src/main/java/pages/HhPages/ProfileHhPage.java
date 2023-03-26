@@ -1,4 +1,4 @@
-package pages.HhClasses;
+package pages.HhPages;
 
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.TimeoutException;
