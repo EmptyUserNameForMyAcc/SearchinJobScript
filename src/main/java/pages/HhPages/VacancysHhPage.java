@@ -1,4 +1,4 @@
-package pages.HhClasses;
+package pages.HhPages;
 
 import org.junit.jupiter.api.Assertions;
 import pages.base.BaseTestPage;

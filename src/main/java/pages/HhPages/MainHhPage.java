@@ -1,4 +1,4 @@
-package pages.HhClasses;
+package pages.HhPages;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

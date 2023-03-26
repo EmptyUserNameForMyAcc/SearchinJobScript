@@ -1,4 +1,4 @@
-package pages.HhClasses;
+package pages.HhPages;
 
 import pages.base.BaseTestPage;
 
@@ -107,7 +107,6 @@ public class InsideVacancyHhPage extends BaseTestPage {
 
             if (IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5 && isLessThen6Years) {
                 sentCvOnVacancy();
-
                 sentCvPopUp
                         .letsChooseCv()
                         .openCoveringField()

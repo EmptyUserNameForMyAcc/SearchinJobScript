@@ -11,10 +11,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static constants.Constants.TimeOutsVariables.*;
 
-import pages.HhClasses.*;
-import pages.MailRuClasses.InsideMailRuBoxPage;
-import pages.MailRuClasses.MainMailRuPage;
-import pages.MailRuClasses.SignInMailRuPopUp;
+import pages.HhPages.*;
+import pages.MailRuPages.InsideMailRuBoxPage;
+import pages.MailRuPages.MainMailRuPage;
+import pages.MailRuPages.SignInMailRuPopUp;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 

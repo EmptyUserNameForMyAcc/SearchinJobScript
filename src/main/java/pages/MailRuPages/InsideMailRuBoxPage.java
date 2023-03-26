@@ -1,4 +1,4 @@
-package pages.MailRuClasses;
+package pages.MailRuPages;
 
 import org.openqa.selenium.*;
 
