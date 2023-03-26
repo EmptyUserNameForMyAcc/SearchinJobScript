@@ -72,7 +72,7 @@ public class Constants {
                 "\n6. xPath." +
                 "\nА также паттерны:" +
                 "\nPageObject и PageFactory.\n" +
-                "\nСсылка на проект в GitHub: https://github.com/EmptyUserNameForMyAcc/SearchinJobScript" +
+                "\nСсылка на проект в GitHub: https://github.com/EmptyUserNameForMyAcc/SearchinJobScript" + "\n" +
                 "\nБолее подробную информацию вы можете посмотреть в разделе \"О себе\" внутри моего профиля.\n" +
                 "\nСпасибо и хорошего времени суток!";
     }
