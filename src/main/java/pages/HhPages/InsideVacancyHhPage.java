@@ -73,6 +73,7 @@ public class InsideVacancyHhPage extends BaseTestPage {
                     .replace("null", " ")
                     .replace("\n", " ");
         }
+
         Assertions.assertNotNull(requirementDescription);
 
         for (String containsValue : IS_AUTOMATION_REQUIREMENT) {
@@ -90,8 +91,8 @@ public class InsideVacancyHhPage extends BaseTestPage {
                 }
             }
 
-            boolean IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5 =
-                    countMatch >= 4
+            boolean IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_4 =
+                    countMatch >= 5
                             && requirementDescription.contains("java")
                             && !(requirementDescription.contains("javascript"))
                             && IS_AUTOMATION;
@@ -100,12 +101,12 @@ public class InsideVacancyHhPage extends BaseTestPage {
                     "я описываю всю вакансию -> " + requirementDescription + "\n"
                             + "\n я автоматизация -> " + IS_AUTOMATION
                             + "\n я меньше шести лет -> " + isLessThen6Years
-                            + "\n а я бул для матчей -> " + IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5
+                            + "\n а я бул для матчей -> " + IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_4
                             + "\n я матч счётчик -> " + countMatch
                             + "\n я требование на Java -> " + requirementDescription.contains("java")
                             + "\n я требование на !JS -> " + !(requirementDescription.contains("javascript")));
 
-            if (IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_5 && isLessThen6Years) {
+            if (IS_CONTAIN_JAVA_AUTOMATION_AND_MATCH_MORE_4 && isLessThen6Years) {
                 sentCvOnVacancy();
                 sentCvPopUp
                         .letsChooseCv()
